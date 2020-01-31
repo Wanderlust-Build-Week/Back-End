@@ -8,7 +8,7 @@ const server = express();
 server.use(express.json())
 
 server.use('/api/auth', loginRouter)
-server.use('/api/tours', authMiddleware)
+server.use('/api/tours', authMiddleware, )
 
 server.get('/', (req, res) => {
     res.status(200).json({message: 'Welcome to ChaseWallace.com API'})

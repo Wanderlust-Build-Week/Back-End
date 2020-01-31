@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const secrets = require('../config/secret.js')
 
-const users = require('../users/users-model.js')
+const users = require('../db-models/users-model.js')
 
 router.post('/register', async(req, res, next) => {
 
