@@ -21,7 +21,7 @@ router.post('/upload', authMiddleware, async (req, res, next) => {
 
     const tour = req.body.tour;
 
-    if( !tour || !tour.user || !tour.title || !tour.photo || !tour.location || !tour.description) {
+    if( !tour || !tour.title || !tour.photo || !tour.location || !tour.description || !tour.duration || !tour.guide) {
         return res.status(401).json({message: 'Please include all required information for a tour.'})
     }
 
@@ -69,21 +69,21 @@ router.put('/update/:id', authMiddleware, async (req, res, next) => {
     const tour = req.body.tour;
     // console.log(tour)
     // console.log(req.decoded.user)
-    if(tour.user != req.decoded.user) {
-        return res.status(401).json({message: 'You can only update your own tours.'})
-    }
 
     tours.findById(id)
         .then(saved => {
             if(saved) {
-                console.log(saved)
-                tours.update(tour, id)
-                    .then(updatedTour => {
-                        res.status(200).json(updatedTour)
-                    })
-                    .catch(err => {
-                        res.status(500).json({message: `Failed to update tour ${err}`})
-                    })
+                if(saved.user != req.decoded.user) {
+                    return res.status(401).json({message: 'You can only update your own tours.'})
+                }else {
+                    tours.update(tour, id)
+                        .then(updatedTour => {
+                            res.status(200).json(updatedTour)
+                        })
+                        .catch(err => {
+                            res.status(500).json({message: `Failed to update tour ${err}`})
+                        })
+                }
             } else {
                 res.status(404).json({message: `Could not find tour with id ${id}`})
             }

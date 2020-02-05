@@ -9,6 +9,8 @@ exports.up = function(knex) {
     tours.string('title', 128).notNullable()
     tours.string('photo', 512).notNullable()
     tours.string('location', 128).notNullable()
+    tours.string('duration', 128).notNullable()
+    tours.string('guide', 128).notNullable()
     tours.string('description', 1024)
 
   })

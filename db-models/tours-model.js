@@ -7,11 +7,11 @@ function find() {
 }
 
 function findById(id) {
-    return db('tours').where({id}).first('id', 'user', 'title', 'photo', 'location', 'description')
+    return db('tours').where({id}).first('id', 'user', 'title', 'photo', 'location', 'duration', 'guide', 'description')
 }
 
 function findBy(filter) {
-    return db('tours').where({id}).first('id', 'user', 'title', 'photo', 'location', 'description')
+    return db('tours').where({id}).first('user', 'title', 'photo', 'location', 'duration', 'guide', 'description')
 }
 
 async function add(tour) {
