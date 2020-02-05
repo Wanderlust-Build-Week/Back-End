@@ -4,7 +4,7 @@ exports.up = function(knex) {
 
     tours.increments()
 
-    tours.string('submitter', 128).references('username').inTable('users').onUpdate('CASCADE').onDelete('CASCADE')
+    tours.string('user', 128).references('username').inTable('users').onUpdate('CASCADE').onDelete('CASCADE')
 
     tours.string('title', 128).notNullable()
     tours.string('photo', 512).notNullable()
