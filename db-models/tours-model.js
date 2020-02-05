@@ -11,7 +11,7 @@ function findById(id) {
 }
 
 function findBy(filter) {
-    return db('tours').where({id}).first('user', 'title', 'photo', 'location', 'duration', 'guide', 'description')
+    return db('tours').where({id}).first('id', 'user', 'title', 'photo', 'location', 'duration', 'guide', 'description')
 }
 
 async function add(tour) {
