@@ -10,8 +10,12 @@ function findById(id) {
     return db('tours').where({id}).first('id', 'user', 'title', 'photo', 'location', 'duration', 'guide', 'description')
 }
 
+function findByUser(filter) {
+    return db('tours').where({user: filter})
+}
+
 function findBy(filter) {
-    return db('tours').where({id}).first('id', 'user', 'title', 'photo', 'location', 'duration', 'guide', 'description')
+    return db('tours').where({filter})
 }
 
 async function add(tour) {
@@ -31,5 +35,5 @@ async function update(tour, id) {
 }
 
 module.exports = {
-    find, findBy, findById, add, update, remove
+    find, findBy, findById, add, update, remove, findByUser
 }

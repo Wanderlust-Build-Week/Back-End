@@ -35,6 +35,28 @@ router.post('/upload', authMiddleware, async (req, res, next) => {
             return res.status(500).json({message: `Failed to upload Tour`})
         })
 
+}) 
+
+router.get('/:id', async (req, res, next) => {
+    const {id} = req.params;
+    tours.findById(id)
+        .then(tour => {
+            return res.status(200).json(tour);
+        })
+        .catch(err => {
+            return res.status(402).json({message: "Failed to find tour with that id"})
+        })
+})
+
+router.get('/user/:username', async (req, res, next) => {
+    const {username} = req.params;
+    tours.findByUser(username)
+        .then(data => {
+            return res.status(200).json(data)
+        })
+        .catch(err => {
+            return res.status(402).json({message: "Failed to find tours for the user"})
+        })
 })
 
 router.delete('/delete/:id', authMiddleware, async (req, res, next) => {
