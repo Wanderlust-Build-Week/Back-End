@@ -51,6 +51,23 @@ router.post('/login', async(req, res, next) => {
     }
 })
 
+router.delete('/deleteUser/:username', async(req, res, next) => {
+    const {username} = req.params
+    users.findByUser(username)
+        .then(saved => {
+            users.remove(username)
+                .then(saved => {
+                    return res.status(201).json({message: 'Deleted user'})
+                })
+                .catch(saved => {
+                    return res.status(401).json({message: 'Failed to delete user'})
+                })
+        })
+        .catch(err => {
+            res.status(401).json({message: 'Failed to find that user'})
+        })
+})
+
 function generateToken(user) {
     const payload = {
         subject: user.id,
