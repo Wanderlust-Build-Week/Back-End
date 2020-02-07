@@ -21,6 +21,8 @@ router.post('/upload', authMiddleware, async (req, res, next) => {
 
     const tour = req.body.tour;
 
+    console.log(tour)
+
     if( !tour || !tour.title || !tour.photo || !tour.location || !tour.description || !tour.duration || !tour.guide) {
         return res.status(401).json({message: 'Please include all required information for a tour.'})
     }
